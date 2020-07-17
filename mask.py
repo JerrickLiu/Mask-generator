@@ -4,9 +4,15 @@ import numpy as np
 import os
 import fnmatch
 import random
+import argparse
 
+parser = argparse.ArgumentParser()
 
-def mask(path = '/path/to/your/images/'):
+parser.add_argument('--image_dir', type=str, default=None)
+parser.add_argument('--bg_img_dir', type=str, default=None)
+args = parser.parse_args()
+
+def mask(path):
     for root, dirs, filename in os.walk(path):
         for file in filename:
             new_path = os.path.join(root, file)
@@ -16,59 +22,50 @@ def mask(path = '/path/to/your/images/'):
             f, e = os.path.splitext(new_path)
             cv2.imwrite(f + 'Masked.png', thresh)
 
-def final_image(path = '/same/path/where/you/generated/the/masks'):
-    for root, dirs, filename in os.walk(path):
-        for file in sorted(filename):
-            if fnmatch.fnmatch(file, '*.png') and not fnmatch.fnmatch(file, '*Masked.png'):
-                new_path = os.path.join(root, file)
-                img = cv2.imread(new_path)
-            if fnmatch.fnmatch(file, '*Masked.png'):
-                mask_path = os.path.join(root, file)
-                mask = cv2.imread(mask_path)
-                out = mask.copy()
-                out[mask == 255] = img[mask == 255]
-                f, e = os.path.splitext(mask_path)
-                cv2.imwrite(f + 'MaskedFinal.png', out)
 
-def generate_colored_background(path = '/same/path'):
+def generate_colored_background(path):
+
+    mask(args.image_dir)
+
     for root, dirs, filename in os.walk(path):
         for file in filename:
-            if fnmatch.fnmatch(file, '*MaskedFinal.png'):
+            if fnmatch.fnmatch(file, '*Masked.png'):
                 new_path = os.path.join(root, file)
                 color = list(np.random.choice(range(256), size=3))
                 img = cv2.imread(new_path)
-                img[np.where(((img == [0, 0, 0]).all(axis = 2)))] = color
+                img[np.where(((img == [0, 0, 0]).all(axis=2)))] = color
                 f, e = os.path.splitext(new_path)
                 cv2.imwrite(f + 'ColoredBG.png', img)
-                
-def generate_image_as_background(path = '/same/path',
-                             sand_path = '/path/where/the/image/you/want/as/background'):
-    
-#The background image must be the same size as your mask!! 
 
+
+def generate_image_as_background(path, other_img_path):
+
+    # The background image must be the same size as your mask!!
+
+    mask(args.image_dir)
     images = []
-    for root, dirs, filename in os.walk(sand_path):
+
+    for root, dirs, filename in os.walk(other_img_path):
         for file in filename:
             new_image_path = os.path.join(root, file)
             images.append(new_image_path)
     for root, dirs, filename in os.walk(path):
         for file in sorted(filename):
             bg_img = cv2.imread(random.choice(images))
-            if fnmatch.fnmatch(file, '*.png') and not fnmatch.fnmatch(file, '*Masked.png') and not fnmatch.fnmatch(file,'*Final.png') and not fnmatch.fnmatch(file, '*BG.png'):
-                new_path = os.path.join(root, file)
-                img = cv2.imread(new_path)
             if fnmatch.fnmatch(file, '*Masked.png'):
                 mask_path = os.path.join(root, file)
                 masked_img = cv2.imread(mask_path)
-                bg = cv2.bitwise_or(bg_img, masked_img, mask = None)
+                bg = cv2.bitwise_or(bg_img, masked_img, mask=None)
                 out = bg.copy()
-                out[bg == 255] = img[bg == 255]
+                out[bg == 255] = masked_img[bg == 255]
                 f, e = os.path.splitext(mask_path)
                 cv2.imwrite(f + 'ImageBG.png', out)
+
+
 def main():
-    mask()
-    #final_image()
-    #generate_colored_background()
-    #generate_image_as_background()
+    generate_colored_background(args.image_dir)
+    #generate_image_as_background(args.image_dir, args.bg_img_dir)
+
+
 if __name__ == '__main__':
     main()
