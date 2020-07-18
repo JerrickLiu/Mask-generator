@@ -7,6 +7,6 @@ All you need is Python's computer vision library OpenCV2 to run these functions.
 
 ## Examples
 
-![Apple image masked!](/example_masks/appleMasked.png)
+![Apple image masked!](/example_masks/appleMasked.png =100x50)
 
-![Apple image with background replaced with random color!](/example_masks/appleMaskedColoredBG.png)
+![Apple image with background replaced with random color!](/example_masks/appleMaskedColoredBG.png =100x50)
