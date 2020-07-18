@@ -4,3 +4,9 @@ Various functions to generate masks for images and replace the background of ima
 ## Usage
 
 All you need is Python's computer vision library OpenCV2 to run these functions. Specifiy the image folder where you want the mask applied to in the arguments and that's it. 
+
+## Examples
+
+![Apple image masked!](/example_masks/appleMasked.png)
+
+![Apple image with background replaced with random color!](/example_masks/appleMaskedColoredBG.png)
