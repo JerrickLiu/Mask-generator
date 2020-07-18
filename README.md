@@ -7,6 +7,9 @@ All you need is Python's computer vision library OpenCV2 to run these functions.
 
 ## Examples
 
+Mask function applied to an image of an apple:
 <img src="/example_masks/appleMasked.png" alt="drawing" width="350" height="300" />
+
+Using the mask to replace all 0 value pixels (black) with a random color:
 <img src="/example_masks/appleMaskedColoredBG.png" alt="drawing" width="350" height="300" />
 
