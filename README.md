@@ -7,8 +7,10 @@ All you need is Python's computer vision library OpenCV2 to run these functions.
 
 Once done, the code first generates a mask for the image by thresholding. Certain values above a threshold turn to white pixels and other values below a threshold turn to black pixesl. Play around with the thresholding for your specific images. 
 
-Here are a few examples with a mask applied then replacing all 0 valued pixels (black) to be a different color:
+Here are a few examples with a mask applied to an image of an apple then replacing all 0 valued pixels (black) to be a different color:
 
+
+<img src="/example_masks/apple.png" alt="drawing" width="350" height="300" />
 
 <img src="/example_masks/appleMaskedMaskedFinal.png" alt="drawing" width="350" height="300" />
 
