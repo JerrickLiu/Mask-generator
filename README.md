@@ -12,6 +12,5 @@ Here are a few examples with a mask applied then replacing all 0 valued pixels (
 
 <img src="/example_masks/appleMasked.png" alt="drawing" width="350" height="300" />
 
-Using the mask to replace all 0 value pixels (black) with a random color:
 <img src="/example_masks/appleMaskedColoredBG.png" alt="drawing" width="350" height="300" />
 
