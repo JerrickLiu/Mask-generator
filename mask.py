@@ -18,7 +18,7 @@ def mask(path):
             new_path = os.path.join(root, file)
             img = cv2.imread(new_path)
             gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-            ret, thresh = cv2.threshold(gray_img, 20, 255, cv2.THRESH_BINARY_INV)
+            ret, thresh = cv2.threshold(gray_img, 20, 255, cv2.THRESH_BINARY_INV) # Play around with the thresholding here 
             f, e = os.path.splitext(new_path)
             cv2.imwrite(f + 'Masked.png', thresh)
 
