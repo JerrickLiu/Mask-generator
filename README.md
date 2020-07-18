@@ -7,6 +7,6 @@ All you need is Python's computer vision library OpenCV2 to run these functions.
 
 ## Examples
 
-<img src="/example_masks/appleMasked.png" alt="drawing" width="500" height="300" />
-<img src="/example_masks/appleMaskedColoredBG.png" alt="drawing" width="500" height="300" />
+<img src="/example_masks/appleMasked.png" alt="drawing" width="350" height="300" />
+<img src="/example_masks/appleMaskedColoredBG.png" alt="drawing" width="350" height="300" />
 
