@@ -10,7 +10,7 @@ Once done, the code first generates a mask for the image by thresholding. Certai
 Here are a few examples with a mask applied then replacing all 0 valued pixels (black) to be a different color:
 
 
-<img src="/example_masks/appleMasked.png" alt="drawing" width="350" height="300" />
+<img src="/example_masks/appleMaskedMaskedFinal.png" alt="drawing" width="350" height="300" />
 
-<img src="/example_masks/appleMaskedColoredBG.png" alt="drawing" width="350" height="300" />
+<img src="/example_masks/appleMaskedMaskedFinalColoredBG.png" alt="drawing" width="350" height="300" />
 
