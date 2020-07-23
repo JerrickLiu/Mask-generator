@@ -16,26 +16,27 @@ args = parser.parse_args()
 def mask(path):
     for root, dirs, filename in os.walk(path):
         for file in filename:
-            
-            new_path = os.path.join(root, file)
-            img = cv2.imread(new_path)
-            gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            if fnmatch.fnmatch(file, '*.png') or fnmatch.fnmatch(file, '*.jpg'):
+                new_path = os.path.join(root, file)
+                img = cv2.imread(new_path)
+                gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-            #Play around with the thresholding here by changing the second value
+                #Play around with the thresholding here by changing the second value
 
-            ret, thresh = cv2.threshold(gray_img, 200, 255, cv2.THRESH_BINARY_INV)
+                ret, thresh = cv2.threshold(gray_img, 150, 255, cv2.THRESH_BINARY_INV)
 
-            f, e = os.path.splitext(new_path)
-            cv2.imwrite(f + 'Masked.png', thresh)
+                f, e = os.path.splitext(new_path)
+                cv2.imwrite(f + 'Masked.png', thresh)
 
 
 def final_image(path):
 
     for root, dirs, filename in os.walk(path):
         for file in sorted(filename):
-            if fnmatch.fnmatch(file, '*.png') and not fnmatch.fnmatch(file, '*Masked.png'):
+            if (fnmatch.fnmatch(file, '*.png') or fnmatch.fnmatch(file, '*.jpg')) and not fnmatch.fnmatch(file, '*Masked.png'):
                 new_path = os.path.join(root, file)
                 img = cv2.imread(new_path)
+
             if fnmatch.fnmatch(file, '*Masked.png'):
                 mask_path = os.path.join(root, file)
                 mask = cv2.imread(mask_path)
