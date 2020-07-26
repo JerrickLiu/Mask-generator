@@ -1,3 +1,18 @@
+import cv2
+import matplotlib.pyplot as plt
+import numpy as np
+import os
+import fnmatch
+import random
+import argparse
+
+parser = argparse.ArgumentParser()
+
+parser.add_argument('--image_dir', type=str, default=None)
+parser.add_argument('--background_image_dir', type=str, default=None)
+args = parser.parse_args()
+
+
 def mask(path):
     for root, dirs, filename in os.walk(path):
         for file in filename:
@@ -78,7 +93,7 @@ def generate_image_as_background(path, other_img_path):
 
 def main():
     generate_colored_background(args.image_dir)
-    # generate_image_as_background()
+    # generate_image_as_background(args.background_image_dir)
 
 
 if __name__ == '__main__':
